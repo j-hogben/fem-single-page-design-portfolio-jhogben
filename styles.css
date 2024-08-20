@@ -1,0 +1,594 @@
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ CUSTOM FONTS ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
+@font-face {
+  font-family: 'PlusJakartaSans';
+  src: url(./assets/fonts/PlusJakartaSans-VariableFont_wght.ttf);
+}
+
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ CSS RESET ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
+/* 1. Use a more-intuitive box-sizing model. */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+/* 2. Remove default padding and margin */
+* {
+  padding: 0;
+  margin: 0;
+}
+/* Typographic tweaks! 3. Improve text rendering */
+body {
+  -webkit-font-smoothing: antialiased;
+}
+/* 4. Improve media defaults */
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+/* 5. Avoid text overflows */
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+/* 6. Remove default link styles */
+a {
+  display: inline-block;
+  font-family: inherit;
+  color: inherit;
+  text-decoration: none;
+}
+/* 7. Remove default list styles */
+ul {
+  list-style: none;
+}
+
+:root {
+  /* PAGE PADDING */
+  --page-padding: 1rem;
+  --header-padding: 1.125rem;
+
+  /* MAX PAGE WIDTH */
+  --page-max-width: calc(1110px + var(--page-padding) * 2);
+
+  /* COLOURS */
+  --clr-black: #030303;
+  --clr-medium-brown: #7a746e;
+  --clr-light-cream: #fff7f0;
+  --clr-galactic-blue: #755cde;
+  --clr-summer-yellow: #f6a560;
+  --clr-pink: #f39e9e;
+  --clr-light-red: #eb7565;
+  --clr-cyan: #61c4b7;
+  --clr-dark-purple: #552049;
+
+  /* FONT SIZE */
+  --fs-heading-prim: 2.25rem; /* 36px */
+  --fs-grid: 1.5rem; /* 24px */
+  --fs-heading-section: 1.625rem; /* 26px */
+  --fs-carousel: 1.5rem; /* 24px */
+  --fs-body: 1rem; /* 16px */
+  --fs-button: 0.875rem; /* 14px */
+
+  /* FONT WEIGHT */
+  --fw-bold: 700;
+  --fw-medium: 500;
+
+  /* LINE HEIGHT */
+  --lh-heading-prim: 1.25;
+  --lh-grid: 1.25;
+  --lh-heading-section: 1.27;
+  --lh-carousel: 1.25;
+  --lh-body: 1.625;
+  --lh-button: 2;
+
+  /* LOGO */
+  --logo-size: 3rem; /* 48px */
+
+  /* TRANSITIONS */
+  --transition-timing-100: all 100ms ease-in-out;
+}
+
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ FONT STYLING ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+body {
+  font-family: 'PlusJakartaSans', sans-serif;
+  font-weight: var(--fw-medium);
+  color: var(--clr-medium-brown);
+}
+
+h1 {
+  font-size: var(--fs-heading-prim);
+  line-height: var(--lh-heading-prim);
+}
+
+h2:not(.carousel-header) {
+  font-size: var(--fs-heading-section);
+  line-height: var(--lh-heading-section);
+}
+
+.carousel-header {
+  font-size: var(--fs-carousel);
+  line-height: var(--lh-carousel);
+}
+
+h3 {
+  font-size: var(--fs-grid);
+  line-height: var(--lh-grid);
+  color: var(--clr-light-cream);
+}
+
+h1,
+h2,
+h3 {
+  font-weight: var(--fw-bold);
+}
+
+h1,
+h2:not(.book-call) {
+  color: var(--clr-black);
+}
+
+p {
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+}
+
+@media (min-width: 768px) {
+  :root {
+    /* FONT SIZE */
+    --fs-heading-prim: 2.75rem; /* 44px */
+    --fs-heading-section: 2rem; /* 32px */
+    --fs-carousel: 2rem; /* 32px */
+    --fs-body: 1.125rem; /* 18px */
+
+    /* LINE HEIGHT */
+    --lh-heading-section: 1.25;
+    --lh-body: 1.556;
+  }
+}
+
+@media (min-width: 1440px) {
+  :root {
+    /* FONT SIZE */
+    --fs-heading-prim: 3.5rem; /* 56px */
+    --fs-heading-section: 2.5rem; /* 40px */
+
+    /* LINE HEIGHT */
+    --lh-heading-prim: 1.268;
+  }
+}
+
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ PAGE PADDING ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
+header,
+main > section:not(.carousel-section),
+footer {
+  max-width: var(--page-max-width);
+  margin-inline: auto;
+}
+
+.page-padding {
+  padding-inline: var(--page-padding);
+}
+
+@media (min-width: 768px) {
+  :root {
+    --page-padding: 2.5rem;
+  }
+}
+
+@media (min-width: 1440px) {
+  :root {
+    --page-padding: 10.25rem;
+  }
+
+  .carousel-section {
+    max-width: var(--page-max-width);
+    margin-inline: auto;
+  }
+}
+
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ PAGE LAYOUT ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
+main section {
+  border: 1px solid red;
+}
+
+main > section:first-of-type {
+  padding-top: 1rem;
+}
+
+main > section:not(:first-of-type) {
+  margin-top: 6.25rem;
+}
+
+@media (min-width: 768px) {
+  main > section:first-of-type {
+    padding-top: 1.875rem;
+  }
+}
+
+@media (min-width: 1440px) {
+  main > section:first-of-type {
+    padding-top: 2rem;
+  }
+}
+
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ UTILITY CLASSES ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
+body {
+  background-color: var(--clr-light-cream);
+}
+
+.black {
+  background-color: var(--clr-black);
+}
+
+.galactic-blue {
+  background-color: var(--clr-galactic-blue);
+}
+
+.summer-yellow {
+  background-color: var(--clr-summer-yellow);
+}
+
+.pink {
+  background-color: var(--clr-pink);
+}
+
+.light-red {
+  background-color: var(--clr-light-red);
+}
+
+.cyan {
+  background-color: var(--clr-cyan);
+}
+
+.dark-purple {
+  background-color: var(--clr-dark-purple);
+}
+
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ BUTTON STYLING ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
+button,
+.cta-btn {
+  cursor: pointer;
+  transition: var(--transition-timing-100);
+  white-space: nowrap;
+}
+
+.cta-btn {
+  --padding-btn: 0.5rem 1.75rem;
+  --radius-btn: 1.75rem; /* 28px */
+
+  font-size: var(--fs-button);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-button);
+  color: var(--clr-light-cream);
+  padding: var(--padding-btn);
+  border-radius: var(--radius-btn);
+  max-width: fit-content;
+}
+
+.btn-black {
+  background-color: var(--clr-black);
+}
+
+.btn-black:hover {
+  background-color: var(--clr-galactic-blue);
+}
+
+.btn-light-red {
+  background-color: var(--clr-light-red);
+}
+
+.btn-light-red:hover {
+  background-color: var(--clr-summer-yellow);
+}
+
+@media (min-width: 768px) {
+  :root {
+    /* FONT SIZE */
+    --fs-button: 1rem; /* 16px */
+
+    /* LINE HEIGHT */
+    --lh-button: 1.75;
+  }
+
+  .cta-btn {
+    /* PADDING */
+    --padding-btn: 0.875rem 2.8125rem;
+  }
+}
+
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ LOGO STYLING ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
+.logo {
+  width: var(--logo-size);
+}
+
+@media (min-width: 768px) {
+  :root {
+    /* LOGO */
+    --logo-size: 4rem; /* 64px */
+  }
+}
+
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ HEADER AND FOOTER ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
+header,
+footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--clr-light-cream);
+}
+
+header {
+  --header-padding-block: var(--header-padding);
+  padding-block: var(--header-padding-block);
+}
+
+footer {
+  --footer-padding-block: 2.5rem 2rem;
+  padding-block: var(--footer-padding-block);
+}
+
+@media (max-width: 425px) {
+  header {
+    position: fixed;
+    width: 100%;
+    z-index: 999;
+  }
+
+  main {
+    padding-block: calc(var(--header-padding) * 2 + var(--logo-size));
+  }
+
+  footer {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) {
+  header {
+    --header-padding-block: 2.125rem;
+  }
+
+  footer {
+    --footer-padding-block: 3.5rem;
+  }
+}
+
+@media (min-width: 1440px) {
+  header {
+    --header-padding-block: 2.375rem;
+  }
+
+  footer {
+    --footer-padding-block: 3.5rem 4rem;
+  }
+}
+
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ INTRO PARAGRAPH ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
+.intro {
+  text-align: center;
+}
+
+.intro p {
+  margin-top: 1rem;
+  max-width: 35.8125rem;
+  margin-inline: auto;
+}
+
+@media (min-width: 768px) {
+  .intro p {
+    margin-top: 1.625rem;
+  }
+}
+
+@media (min-width: 1440px) {
+  .intro p {
+    max-width: 45.6525rem;
+    margin-top: 1.4375rem;
+  }
+}
+
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ GRID SECTION ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
+.graphic-design {
+  grid-area: graphic-design;
+}
+
+.ui-ux-card {
+  grid-area: ui-ux-card;
+}
+
+.apps-card {
+  grid-area: apps-card;
+}
+
+.illustrations-card {
+  grid-area: illustrations-card;
+}
+
+.photography-card {
+  grid-area: photography-card;
+}
+
+.motion-graphics-card {
+  grid-area: motion-graphics-card;
+}
+
+.grid-container {
+  margin-top: 2rem;
+  display: grid;
+  grid-template-rows:
+    repeat(2, 11.375rem 9.875rem)
+    repeat(2, 11.375rem);
+  grid-template-areas:
+    'graphic-design graphic-design'
+    'graphic-design graphic-design'
+    'ui-ux-card apps-card'
+    'illustrations-card illustrations-card'
+    'photography-card photography-card'
+    'motion-graphics-card motion-graphics-card';
+  gap: 1.5rem;
+}
+
+.card {
+  --card-padding: 1.5rem;
+  position: relative;
+  padding: var(--card-padding);
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: end;
+  transition: var(--transition-timing-100);
+  box-shadow: 0px 0px 30px 0px rgba(204, 204, 204, 0);
+
+  img {
+    position: absolute;
+    top: var(--card-padding);
+    right: var(--card-padding);
+  }
+}
+
+.card:hover {
+  scale: 1.025;
+  box-shadow: 10px 10px 30px 0px rgba(204, 204, 204, 50);
+}
+
+@media (min-width: 640px) {
+  .grid-container {
+    margin-top: 4rem;
+    grid-template-rows: 11.375rem 9.875rem 11.375rem;
+    grid-template-areas:
+      'graphic-design graphic-design ui-ux-card apps-card'
+      'graphic-design graphic-design illustrations-card illustrations-card'
+      'photography-card photography-card motion-graphics-card motion-graphics-card';
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid-container {
+    margin-top: 5rem;
+    grid-template-rows: 11.375rem 9.875rem;
+    grid-template-areas:
+      'graphic-design graphic-design ui-ux-card apps-card photography-card photography-card'
+      'graphic-design graphic-design illustrations-card illustrations-card motion-graphics-card motion-graphics-card';
+  }
+}
+
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ AMY SECTION ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
+.amy-section .flex-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.5rem;
+}
+
+.amy-image {
+  width: 100%;
+  max-width: 18.75rem;
+}
+
+.flex-right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .amy-section .flex-container {
+    flex-direction: row;
+    gap: 0;
+  }
+
+  .flex-left,
+  .flex-right {
+    width: 50%;
+  }
+
+  .amy-image {
+    --amy-image-size: 364px;
+    position: relative;
+    width: var(--amy-image-size);
+    max-width: var(--amy-image-size);
+    left: calc(-20rem + 30vw);
+  }
+
+  .flex-right {
+    align-items: start;
+    text-align: start;
+  }
+}
+
+@media (min-width: 1024px) {
+  .amy-section .flex-container {
+    gap: 2.5rem;
+  }
+
+  .amy-image {
+    --amy-image-size: 445px;
+    left: 0;
+  }
+}
+
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ CAROUSEL SECTION ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ BOOK A CALL SECTION ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
+.black {
+  --book-vertical-gap: 1.5rem;
+  padding: 3rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--book-vertical-gap);
+  color: var(--clr-light-cream);
+  border-radius: 0.625rem;
+}
+
+.book-text p {
+  margin-top: var(--book-vertical-gap);
+}
+
+@media (min-width: 768px) {
+  .black {
+    --book-vertical-gap: 1.625rem;
+    padding: 3.5rem 4.6875rem 4rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .black {
+    padding: 3.5rem 4.6875rem 4rem;
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
+    gap: 5rem;
+  }
+
+  .book-text {
+    max-width: 33.75rem;
+  }
+
+  .book-text p {
+    --book-vertical-gap: 1.5625rem;
+  }
+}
