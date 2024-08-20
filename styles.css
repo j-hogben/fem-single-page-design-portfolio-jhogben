@@ -52,11 +52,6 @@ a {
 ul {
   list-style: none;
 }
-/* 8. Remove mobile button highlight when active */
-a,
-button {
-  -webkit-tap-highlight-color: transparent;
-}
 
 :root {
   /* PAGE PADDING */
