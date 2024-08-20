@@ -288,24 +288,20 @@ button,
   background-color: var(--clr-black);
 }
 
-@media(hover: hover) {
-  .btn-black:hover,
-  .btn-black:focus {
-    /* outline: none; */
-    background-color: var(--clr-galactic-blue);
-  }
+.btn-black:hover,
+.btn-black:focus {
+  /* outline: none; */
+  background-color: var(--clr-galactic-blue);
 }
 
 .btn-light-red {
   background-color: var(--clr-light-red);
 }
 
-@media(hover: hover) {
-  .btn-light-red:hover,
-  .btn-light-red:focus {
-    /* outline: none; */
-    background-color: var(--clr-summer-yellow);
-  }
+.btn-light-red:hover,
+.btn-light-red:focus {
+  /* outline: none; */
+  background-color: var(--clr-summer-yellow);
 }
 
 @media (min-width: 768px) {
@@ -476,13 +472,11 @@ footer {
   }
 }
 
-@media(hover: hover) {
-  .card:hover,
-  .card:focus {
-    /* outline: none; */
-    scale: 1.05;
-    box-shadow: 10px 10px 30px 0px rgba(204, 204, 204, 50);
-  }
+.card:hover,
+.card:focus {
+  /* outline: none; */
+  scale: 1.05;
+  box-shadow: 10px 10px 30px 0px rgba(204, 204, 204, 50);
 }
 
 @media (min-width: 640px) {
@@ -618,7 +612,7 @@ footer {
   cursor: auto;
 }
 
-@media(hover: hover) {
+@media (hover: hover) {  
   .carousel:not(:has(.current-slide.first-slide)) .carousel__button--left:hover {
     background-color: var(--clr-galactic-blue);
   }
@@ -629,7 +623,7 @@ footer {
   cursor: auto;
 }
 
-@media(hover: hover) {
+@medua (hover: hover) {
   .carousel:not(:has(.current-slide.last-slide)) .carousel__button--right:hover {
     background-color: var(--clr-galactic-blue);
   }
