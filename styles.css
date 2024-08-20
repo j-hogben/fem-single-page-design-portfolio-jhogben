@@ -29,7 +29,7 @@ video,
 canvas,
 svg {
   display: block;
-  max-width: 100%;
+  /* max-width: 100%; */
 }
 /* 5. Avoid text overflows */
 p,
@@ -60,6 +60,11 @@ ul {
 
   /* MAX PAGE WIDTH */
   --page-max-width: calc(1110px + var(--page-padding) * 2);
+
+  /* CAROUSEL */
+  --image-height: 180px;
+  --image-width: 270px;
+  --image-gap: 15px;
 
   /* COLOURS */
   --clr-black: #030303;
@@ -97,6 +102,9 @@ ul {
 
   /* TRANSITIONS */
   --transition-timing-100: all 100ms ease-in-out;
+
+  /* BORDER RADIUS */
+  --border-radius-card: 0.625rem;
 }
 
 /* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ FONT STYLING ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
@@ -201,7 +209,7 @@ footer {
 /* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ PAGE LAYOUT ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
 
 main section {
-  border: 1px solid red;
+  /* border: 1px solid red; */
 }
 
 main > section:first-of-type {
@@ -284,7 +292,9 @@ button,
   background-color: var(--clr-black);
 }
 
-.btn-black:hover {
+.btn-black:hover,
+.btn-black:focus {
+  /* outline: none; */
   background-color: var(--clr-galactic-blue);
 }
 
@@ -292,7 +302,9 @@ button,
   background-color: var(--clr-light-red);
 }
 
-.btn-light-red:hover {
+.btn-light-red:hover,
+.btn-light-red:focus {
+  /* outline: none; */
   background-color: var(--clr-summer-yellow);
 }
 
@@ -464,8 +476,10 @@ footer {
   }
 }
 
-.card:hover {
-  scale: 1.025;
+.card:hover,
+.card:focus {
+  /* outline: none; */
+  scale: 1.05;
   box-shadow: 10px 10px 30px 0px rgba(204, 204, 204, 50);
 }
 
@@ -549,6 +563,93 @@ footer {
 }
 
 /* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ CAROUSEL SECTION ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+.carousel-section {
+  --carousel-gap: 2rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--carousel-gap);
+  text-align: center;
+}
+
+.carousel {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.carousel__track {
+  list-style: none;
+  display: flex;
+  gap: var(--image-gap);
+  transition: all 250ms ease-in-out;
+}
+
+.carousel__image {
+  height: var(--image-height);
+  width: var(--image-width);
+  border-radius: var(--border-radius-card);
+}
+
+.first-slide {
+  margin-left: calc(50% - var(--image-width) / 2);
+}
+
+.carousel__buttons-container {
+  display: flex;
+  gap: 1rem;
+  max-width: fit-content;
+  margin-inline: auto;
+  margin-top: var(--carousel-gap);
+}
+
+.carousel__buttons-container button {
+  position: relative;
+  border: none;
+  background-color: var(--clr-black);
+  padding: 1.5rem;
+  border-radius: 50%;
+}
+
+.carousel:has(.current-slide.first-slide) .carousel__button--left {
+  opacity: 0.7;
+  cursor: auto;
+}
+
+.carousel:not(:has(.current-slide.first-slide)) .carousel__button--left:hover {
+  background-color: var(--clr-galactic-blue);
+}
+
+.carousel:has(.current-slide.last-slide) .carousel__button--right {
+  opacity: 0.7;
+  cursor: auto;
+}
+
+.carousel:not(:has(.current-slide.last-slide)) .carousel__button--right:hover {
+  background-color: var(--clr-galactic-blue);
+}
+
+@media (min-width: 640px) {
+  :root {
+    /* CAROUSEL */
+    --image-height: 270px;
+    --image-width: 405px;
+    --image-gap: 22.5px;
+  }
+}
+
+@media (min-width: 768px) {
+  :root {
+    /* CAROUSEL */
+    --image-height: 360px;
+    --image-width: 540px;
+    --image-gap: 30px;
+  }
+
+  .carousel-section {
+    --carousel-gap: 3.5rem;
+  }
+}
 
 /* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ BOOK A CALL SECTION ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
 
@@ -561,7 +662,7 @@ footer {
   text-align: center;
   gap: var(--book-vertical-gap);
   color: var(--clr-light-cream);
-  border-radius: 0.625rem;
+  border-radius: var(--border-radius-card);
 }
 
 .book-text p {
