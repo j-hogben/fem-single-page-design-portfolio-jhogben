@@ -52,6 +52,11 @@ a {
 ul {
   list-style: none;
 }
+/* 8. Remove mobile button highlight when active */
+a,
+button {
+  -webkit-tap-highlight-color: transparent;
+}
 
 :root {
   /* PAGE PADDING */
@@ -207,10 +212,6 @@ footer {
 }
 
 /* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ PAGE LAYOUT ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
-
-main section {
-  /* border: 1px solid red; */
-}
 
 main > section:first-of-type {
   padding-top: 1rem;
