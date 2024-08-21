@@ -1,6 +1,6 @@
 const currentIndexDisplay = document.querySelector('#currentSlideIndexDisplay');
 const carousel = document.querySelector('.carousel');
-const slides = document.querySelectorAll('.carousel__slide');
+const slides = Array.from(document.querySelectorAll('.carousel__slide'));
 const carouselPrev = document.querySelector('.carousel__button--prev');
 const carouselNext = document.querySelector('.carousel__button--next');
 
@@ -21,7 +21,8 @@ const scrollToPrevSlide = () => {
 // ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
 
 const scrollToNextSlide = () => {
-  if (currentIndex < slides.length - 1) {
+  const slideCount = slides.length - 1;
+  if (currentIndex < slideCount) {
     currentIndex++;
     carousel.scrollLeft += slideWidth;
     setTimeout(() => styleInvalidCarouselNavBtns(currentIndex), 100);
@@ -49,7 +50,6 @@ const updateSlideDimensions = () => {
     getComputedStyle(carousel).getPropertyValue('--carousel-gap')
   );
   slideWidth = slides[0].offsetWidth + slideGap;
-  console.log(slideWidth);
 };
 // ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
 
