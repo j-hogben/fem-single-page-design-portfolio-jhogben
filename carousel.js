@@ -1,7 +1,7 @@
 const currentIndexDisplay = document.querySelector('#currentSlideIndexDisplay');
 const carousel = document.querySelector('.carousel');
 const slides = Array.from(document.querySelectorAll('.carousel__slide'));
-// const slideCount = slides.length - 1;
+const slideCount = slides.length - 1;
 const carouselPrev = document.querySelector('.carousel__button--prev');
 const carouselNext = document.querySelector('.carousel__button--next');
 
@@ -23,7 +23,7 @@ const scrollToPrevSlide = () => {
 
 const scrollToNextSlide = () => {
   // const slideCount = slides.length - 1;
-  if (currentIndex < 4) {
+  if (currentIndex < slideCount) {
     currentIndex++;
     carousel.scrollLeft += slideWidth;
     setTimeout(() => styleInvalidCarouselNavBtns(currentIndex), 100);
@@ -65,7 +65,7 @@ const styleInvalidCarouselNavBtns = (index) => {
   }
   /* IF INDEX IS LAST SLIDE, INVALIDATE THE 'NEXT' 
     CAROUSEL NAVIGATION BUTTON */
-  if (index === 4) {
+  if (index === slideCount) {
     carouselNext.classList.add('carousel__button-invalid');
   } else {
     carouselNext.classList.remove('carousel__button-invalid');
