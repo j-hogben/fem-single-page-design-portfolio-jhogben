@@ -293,7 +293,7 @@ button,
   background-color: var(--clr-black);
 }
 
-@media (hover: hover) {
+@media (hover: hover) and (pointer: fine) {
   .btn-black:hover,
   .btn-black:focus-visible {
     /* outline: none; */
@@ -305,7 +305,7 @@ button,
   background-color: var(--clr-light-red);
 }
 
-@media (hover: hover) {
+@media (hover: hover) and (pointer: fine) {
   .btn-light-red:hover,
   .btn-light-red:focus-visible {
     /* outline: none; */
@@ -618,7 +618,7 @@ footer {
   cursor: pointer;
 }
 
-@media (hover: hover) {
+@media (hover: hover) and (pointer: fine) {
   .carousel-button:hover {
     background-color: #755cde;
   }
