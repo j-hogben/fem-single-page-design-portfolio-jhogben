@@ -1,90 +1,84 @@
-// //////////////////////////////////////////////////////////////////////////////////////////
-// //////////////////////////////////////////////////////////////////////////////////////////
-
-// ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ CAROUSEL ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
-
+const currentIndexDisplay = document.querySelector('#currentSlideIndexDisplay');
 const carousel = document.querySelector('.carousel');
-const slides = document.querySelectorAll('.carousel .slide');
-const slideLinks = document.querySelectorAll('.carousel .slide-link');
-const carouselPrev = document.querySelector('.carousel-prev-btn');
-const carouselNext = document.querySelector('.carousel-next-btn');
+const slides = document.querySelectorAll('.carousel__slide');
+const carouselPrev = document.querySelector('.carousel__button--prev');
+const carouselNext = document.querySelector('.carousel__button--next');
 
-// INITIALISE CURRENT SLIDE INDEX
 let currentIndex = 0;
+let slideGap;
+let slideWidth;
 
-// CAROUSEL NEXT BUTTON NAVIGATE TO NEXT SLIDE
+// ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+
+const scrollToPrevSlide = () => {
+  if (currentIndex > 0) {
+    currentIndex--;
+    carousel.scrollLeft -= slideWidth;
+    setTimeout(() => styleInvalidCarouselNavBtns(currentIndex), 100);
+  }
+};
+
+// ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+
 const scrollToNextSlide = () => {
   if (currentIndex < slides.length - 1) {
     currentIndex++;
-    styleInvalidCarouselNavBtns(currentIndex);
-    slides[currentIndex].scrollIntoView({
-      behavior: 'smooth',
-      inline: 'start',
-      block: 'nearest',
-    });
-    // console.log(currentIndex);
+    carousel.scrollLeft += slideWidth;
+    setTimeout(() => styleInvalidCarouselNavBtns(currentIndex), 100);
   }
 };
 
-// CAROUSEL PREVIOUS BUTTON NAVIGATTE TO PREVIOUS SLIDE
-const scrollToPreviousSlide = () => {
-  if (currentIndex > 0) {
-    currentIndex--;
-    styleInvalidCarouselNavBtns(currentIndex);
-    slides[currentIndex].scrollIntoView({
-      behavior: 'smooth',
-      inline: 'start',
-      block: 'nearest',
-    });
-    // console.log(currentIndex);
-  }
-};
+// ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
 
 // UPDATE CURRENT INDEX WHEN SCROLLING WITH FINGER OR MOUSE WHEEL SCROLL
 const updateCurrentIndex = () => {
   const scrollLeft = carousel.scrollLeft;
-  const slideGap = getCarouselGap();
-  const slideWidth = slides[0].offsetWidth + slideGap;
-  const newIndex = Math.floor(scrollLeft / slideWidth);
+  // const newIndex = Math.round(scrollLeft / slideWidth);
+  const newIndex = scrollLeft / slideWidth;
   if (newIndex !== currentIndex) {
-    styleInvalidCarouselNavBtns(newIndex);
     currentIndex = newIndex;
+    setTimeout(() => styleInvalidCarouselNavBtns(currentIndex), 100);
   }
-  // console.log(currentIndex);
 };
 
+// ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+
 // FUNCTION TO GET THE --carousel-gap VALUE
-const getCarouselGap = () =>
-  parseFloat(getComputedStyle(carousel).getPropertyValue('--carousel-gap')) *
-  16;
+const updateSlideDimensions = () => {
+  slideGap = parseFloat(
+    getComputedStyle(carousel).getPropertyValue('--carousel-gap')
+  );
+  slideWidth = slides[0].offsetWidth + slideGap;
+  console.log(slideWidth);
+};
+// ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
 
 // FUNCTION TO ADD INVALID BUTTON STYLE DEPENDING ON CURRENT INDEX
 const styleInvalidCarouselNavBtns = (index) => {
   /* IF INDEX IS 0 (FIRST SLIDE SELECTED), INVALIDATE THE
-  'PREVIOUS' CAROUSEL NAVIGATION BUTTON */
+    'PREVIOUS' CAROUSEL NAVIGATION BUTTON */
   if (index === 0) {
-    carouselPrev.classList.add('carousel-button-invalid');
+    carouselPrev.classList.add('carousel__button-invalid');
   } else {
-    carouselPrev.classList.remove('carousel-button-invalid');
+    carouselPrev.classList.remove('carousel__button-invalid');
   }
-
   /* IF INDEX IS LAST SLIDE, INVALIDATE THE 'NEXT' 
-  CAROUSEL NAVIGATION BUTTON */
+    CAROUSEL NAVIGATION BUTTON */
   if (index === slides.length - 1) {
-    carouselNext.classList.add('carousel-button-invalid');
+    carouselNext.classList.add('carousel__button-invalid');
   } else {
-    carouselNext.classList.remove('carousel-button-invalid');
+    carouselNext.classList.remove('carousel__button-invalid');
   }
 };
 
-// INITIALISE STYLING FOR ANY INVALID BUTTONS
+// DO THESE STRAIGHT AWAY
+updateSlideDimensions();
 styleInvalidCarouselNavBtns(currentIndex);
 
-// CAROUSEL EVENT LISTENERS
-carouselPrev.addEventListener('click', scrollToPreviousSlide);
-carouselNext.addEventListener('click', scrollToNextSlide);
+// DO THESE WHEN EVENT HAPPENS ON ELEMENT
 carousel.addEventListener('scroll', updateCurrentIndex);
+carouselNext.addEventListener('click', scrollToNextSlide);
+carouselPrev.addEventListener('click', scrollToPrevSlide);
 
-window.addEventListener('resize', () => {
-  updateCurrentIndex();
-});
+// WHEN BROWSER WINDOW IS RESIZED, RECALCULATE SLIDE DIMENSIONS
+window.addEventListener('resize', updateSlideDimensions);
