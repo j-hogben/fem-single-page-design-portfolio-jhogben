@@ -1,58 +1,90 @@
-const track = document.querySelector('.carousel__track');
-const slides = Array.from(track.children);
-const nextButton = document.querySelector('.carousel__button--right');
-const prevButton = document.querySelector('.carousel__button--left');
+// //////////////////////////////////////////////////////////////////////////////////////////
+// //////////////////////////////////////////////////////////////////////////////////////////
 
-let slideGap;
-let slideWidth;
+// ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ CAROUSEL ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
 
-function updateSlideDimensions() {
-  const rootStyles = getComputedStyle(document.documentElement);
-  slideGap = parseFloat(rootStyles.getPropertyValue('--image-gap'));
-  slideWidth = slides[0].getBoundingClientRect().width + slideGap;
+const carousel = document.querySelector('.carousel');
+const slides = document.querySelectorAll('.carousel .slide');
+const slideLinks = document.querySelectorAll('.carousel .slide-link');
+const carouselPrev = document.querySelector('.carousel-prev-btn');
+const carouselNext = document.querySelector('.carousel-next-btn');
 
-  // Rearrange slides with new width
-  slides.forEach(setSlidePosition);
+// INITIALISE CURRENT SLIDE INDEX
+let currentIndex = 0;
 
-  // Adjust the track position for the current slide
-  const currentSlide = track.querySelector('.current-slide');
-  if (currentSlide) {
-    track.style.transform = `translateX(-${currentSlide.style.left})`;
+// CAROUSEL NEXT BUTTON NAVIGATE TO NEXT SLIDE
+const scrollToNextSlide = () => {
+  if (currentIndex < slides.length - 1) {
+    currentIndex++;
+    styleInvalidCarouselNavBtns(currentIndex);
+    slides[currentIndex].scrollIntoView({
+      behavior: 'smooth',
+      inline: 'start',
+      block: 'nearest',
+    });
+    // console.log(currentIndex);
   }
-}
-
-// Arrange the slides next to one another
-const setSlidePosition = (slide, index) => {
-  slide.style.left = `${slideWidth * index}px`;
 };
 
-// Calculate amount to move
-const moveToSlide = (track, currentSlide, targetSlide) => {
-  track.style.transform = `translateX(-${targetSlide.style.left})`;
-  currentSlide.classList.remove('current-slide');
-  targetSlide.classList.add('current-slide');
+// CAROUSEL PREVIOUS BUTTON NAVIGATTE TO PREVIOUS SLIDE
+const scrollToPreviousSlide = () => {
+  if (currentIndex > 0) {
+    currentIndex--;
+    styleInvalidCarouselNavBtns(currentIndex);
+    slides[currentIndex].scrollIntoView({
+      behavior: 'smooth',
+      inline: 'start',
+      block: 'nearest',
+    });
+    // console.log(currentIndex);
+  }
 };
 
-// When I click right, move slides to the right
-nextButton.addEventListener('click', () => {
-  const currentSlide = track.querySelector('.current-slide');
-  const nextSlide = currentSlide.nextElementSibling;
-  if (nextSlide) {
-    moveToSlide(track, currentSlide, nextSlide);
+// UPDATE CURRENT INDEX WHEN SCROLLING WITH FINGER OR MOUSE WHEEL SCROLL
+const updateCurrentIndex = () => {
+  const scrollLeft = carousel.scrollLeft;
+  const slideGap = getCarouselGap();
+  const slideWidth = slides[0].offsetWidth + slideGap;
+  const newIndex = Math.floor(scrollLeft / slideWidth);
+  if (newIndex !== currentIndex) {
+    styleInvalidCarouselNavBtns(newIndex);
+    currentIndex = newIndex;
   }
-});
+  // console.log(currentIndex);
+};
 
-// When I click left, move slides to the left
-prevButton.addEventListener('click', () => {
-  const currentSlide = track.querySelector('.current-slide');
-  const prevSlide = currentSlide.previousElementSibling;
-  if (prevSlide) {
-    moveToSlide(track, currentSlide, prevSlide);
+// FUNCTION TO GET THE --carousel-gap VALUE
+const getCarouselGap = () =>
+  parseFloat(getComputedStyle(carousel).getPropertyValue('--carousel-gap')) *
+  16;
+
+// FUNCTION TO ADD INVALID BUTTON STYLE DEPENDING ON CURRENT INDEX
+const styleInvalidCarouselNavBtns = (index) => {
+  /* IF INDEX IS 0 (FIRST SLIDE SELECTED), INVALIDATE THE
+  'PREVIOUS' CAROUSEL NAVIGATION BUTTON */
+  if (index === 0) {
+    carouselPrev.classList.add('carousel-button-invalid');
+  } else {
+    carouselPrev.classList.remove('carousel-button-invalid');
   }
+
+  /* IF INDEX IS LAST SLIDE, INVALIDATE THE 'NEXT' 
+  CAROUSEL NAVIGATION BUTTON */
+  if (index === slides.length - 1) {
+    carouselNext.classList.add('carousel-button-invalid');
+  } else {
+    carouselNext.classList.remove('carousel-button-invalid');
+  }
+};
+
+// INITIALISE STYLING FOR ANY INVALID BUTTONS
+styleInvalidCarouselNavBtns(currentIndex);
+
+// CAROUSEL EVENT LISTENERS
+carouselPrev.addEventListener('click', scrollToPreviousSlide);
+carouselNext.addEventListener('click', scrollToNextSlide);
+carousel.addEventListener('scroll', updateCurrentIndex);
+
+window.addEventListener('resize', () => {
+  updateCurrentIndex();
 });
-
-// Initial setup
-updateSlideDimensions();
-
-// When the window is resized, update the slide dimensions
-window.addEventListener('resize', updateSlideDimensions);
