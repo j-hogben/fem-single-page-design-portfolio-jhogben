@@ -22,7 +22,7 @@ const scrollToPrevSlide = () => {
 
 const scrollToNextSlide = () => {
   const slideCount = slides.length - 1;
-  if (currentIndex < slideCount) {
+  if (currentIndex < 4) {
     currentIndex++;
     carousel.scrollLeft += slideWidth;
     setTimeout(() => styleInvalidCarouselNavBtns(currentIndex), 100);
